@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { FC } from 'react';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+
+import Admin from './views/Admin';
+import Login from './views/Login';
+import Detail from './views/Detail';
+import Buttons from './views/Buttons';
+import NoMatch from './views/NoMatch';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App: FC = () => (
+  <HashRouter>
+    <Switch>
+      <Route path="/admin">
+        <Admin>
+          <Switch>
+            <Route path="/admin/ui/buttons" component={Buttons} />
+          </Switch>
+        </Admin>
+      </Route>
+      <Route path="/login" component={Login} />
+      <Route path="/detail" component={Detail} />
+      <Route component={NoMatch} />
+    </Switch>
+  </HashRouter>
+);
 
 export default App;
